@@ -1,0 +1,3 @@
+services:
+  coreai-mcu-event:
+    command: npm run start:debug
