@@ -1,13 +1,21 @@
-const server = require('./server')
+require('./insights').setup()
+require('log-timestamp')
+const { start, stop } = require('./messaging')
+const { initialiseTables } = require('./storage')
+const createServer = require('./server')
 
-const init = async () => {
-  await server.start()
-  console.log('Server running on %s', server.info.uri)
-}
-
-process.on('unhandledRejection', (err) => {
-  console.log(err)
-  process.exit(1)
+process.on(['SIGTERM', 'SIGINT'], async () => {
+  await stop()
+  process.exit(0)
 })
 
-init()
+module.exports = (async () => {
+  await initialiseTables()
+  await start()
+  createServer()
+    .then(server => server.start())
+    .catch(err => {
+      console.error(err)
+      process.exit(1)
+    })
+})()

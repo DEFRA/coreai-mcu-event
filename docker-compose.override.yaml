@@ -9,7 +9,7 @@ services:
     image: coreai-mcu-event-development
     container_name: coreai-mcu-event-development
     ports:
-      - "3000:3000"
+      - "3005:3000"
       - "9229:9229"
     volumes:
       - ./app:/home/node/app
@@ -17,11 +17,13 @@ services:
       - ./scripts:/home/node/scripts
       - ./package.json:/home/node/package.json
   
-  coreai-mcu-event-postgres:
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+  coreai-mcu-event-azurite:
+      volumes:
+        - azurite_data:/data
+      ports:
+        - "10080:10000"
+        - "10081:10001"
+        - "10082:10002"
 
 volumes:
-  postgres_data:
+  azurite_data:
