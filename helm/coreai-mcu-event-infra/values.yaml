@@ -2,8 +2,8 @@
 # You may create Queues, Topics, Subscriptions, Storage Accounts, Databases and Role Assignments on these here.
 
 namespaceTopics:
-  - name: coreai-mcu-events
+  - name: events
     roleAssignments:
       - roleName: 'TopicReceiver'
     topicSubscriptions:
-      - name: 'coreai-mcu-event'
+      - name: event
