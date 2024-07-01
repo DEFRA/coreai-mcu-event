@@ -3,6 +3,7 @@
 
 namespaceTopics:
   - name: events
-    owner: 'no'
     roleAssignments:
       - roleName: 'TopicReceiver'
+    topicSubscriptions:
+      - name: event
